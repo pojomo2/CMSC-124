@@ -1,0 +1,15 @@
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/bin/Release/net10.0/Interpreter
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/bin/Release/net10.0/Interpreter.deps.json
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/bin/Release/net10.0/Interpreter.runtimeconfig.json
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/bin/Release/net10.0/Interpreter.dll
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/bin/Release/net10.0/Interpreter.pdb
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.GeneratedMSBuildEditorConfig.editorconfig
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.AssemblyInfoInputs.cache
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.AssemblyInfo.cs
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.csproj.CoreCompileInputs.cache
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.sourcelink.json
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.dll
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/refint/Interpreter.dll
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.pdb
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.genruntimeconfig.cache
+/home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/ref/Interpreter.dll
