@@ -1,0 +1,5 @@
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\build\Interpreter.exe
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\build\Interpreter.dll
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\build\Interpreter.deps.json
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\build\Interpreter.runtimeconfig.json
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\build\Interpreter.pdb

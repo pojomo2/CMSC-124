@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jared\\Documents\\@DEVELOPER\\interpreter\\Interpreter.csproj": {}
+    "C:\\Users\\Jared\\Documents\\@DEVELOPER\\cmsc124_compiler\\cmsc124-compiler.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jared\\Documents\\@DEVELOPER\\interpreter\\Interpreter.csproj": {
+    "C:\\Users\\Jared\\Documents\\@DEVELOPER\\cmsc124_compiler\\cmsc124-compiler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jared\\Documents\\@DEVELOPER\\interpreter\\Interpreter.csproj",
-        "projectName": "Interpreter",
-        "projectPath": "C:\\Users\\Jared\\Documents\\@DEVELOPER\\interpreter\\Interpreter.csproj",
+        "projectUniqueName": "C:\\Users\\Jared\\Documents\\@DEVELOPER\\cmsc124_compiler\\cmsc124-compiler.csproj",
+        "projectName": "cmsc124-compiler",
+        "projectPath": "C:\\Users\\Jared\\Documents\\@DEVELOPER\\cmsc124_compiler\\cmsc124-compiler.csproj",
         "packagesPath": "C:\\Users\\Jared\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jared\\Documents\\@DEVELOPER\\interpreter\\obj\\",
+        "outputPath": "C:\\Users\\Jared\\Documents\\@DEVELOPER\\cmsc124_compiler\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jared\\AppData\\Roaming\\NuGet\\NuGet.Config"

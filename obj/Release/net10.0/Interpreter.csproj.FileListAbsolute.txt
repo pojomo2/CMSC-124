@@ -13,3 +13,18 @@
 /home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.pdb
 /home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/Interpreter.genruntimeconfig.cache
 /home/drewtc/Documents/UPV/CMSC 124/Lab/Lab 0/obj/Release/net10.0/ref/Interpreter.dll
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\bin\Release\net10.0\Interpreter.exe
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\bin\Release\net10.0\Interpreter.deps.json
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\bin\Release\net10.0\Interpreter.runtimeconfig.json
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\bin\Release\net10.0\Interpreter.dll
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\bin\Release\net10.0\Interpreter.pdb
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\Interpreter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\Interpreter.AssemblyInfoInputs.cache
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\Interpreter.AssemblyInfo.cs
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\Interpreter.csproj.CoreCompileInputs.cache
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\Interpreter.sourcelink.json
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\Interpreter.dll
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\refint\Interpreter.dll
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\Interpreter.pdb
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\Interpreter.genruntimeconfig.cache
+C:\Users\Jared\Documents\@DEVELOPER\interpreter\obj\Release\net10.0\ref\Interpreter.dll
