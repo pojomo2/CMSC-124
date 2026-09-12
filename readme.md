@@ -5,14 +5,15 @@
 -  ([github-username])
 - [Full name] ([github-username])
 
-## Overview
+## Overview 
 
 [One paragraph: what the language is for, who would use it, what writing it
 feels like.]
+...
 
 ## Host language and build
 
-- Host language: [language and version]
+- Host language: C#
 - Version metadata: [file that pins it, e.g. rust-toolchain.toml, go.mod]
 - Build: `./build.sh`
 - [Anything a fresh clone needs to know.]
