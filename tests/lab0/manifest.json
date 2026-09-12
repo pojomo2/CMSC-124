@@ -1,5 +1,0 @@
-{
-  "ext": ".teic",
-  "mode": "sidecar",
-  "run_entrypoint": "./run"
-}
