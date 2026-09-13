@@ -1,56 +1,93 @@
-# TEIC language
+# ============================================================================= #
+#                          THE ILETO PROJECT: Overview                          #
+# ============================================================================= #
 
 ## Creators
+  - Drew T. Cudiamat 		(pojomo2)
+  - Jared Ramyll D. Chua 	(ultramarine23)
 
--  ([github-username])
-- [Full name] ([github-username])
 
 ## Overview 
+  The Ileto language is a high-level, event-driven language with a readability-
+  first design philosophy. It is designed for a different take on traditional
+  OOP, with a more intuitive event-centric design that removes the boilerplate
+  associated with events in other languages.
 
-[One paragraph: what the language is for, who would use it, what writing it
-feels like.]
-...
 
 ## Host language and build
+  - Host language: C#
+  - Version metadata: dotnet 10.0.400
+  - Build: `./build.sh`
 
-- Host language: C#
-- Version metadata: [file that pins it, e.g. rust-toolchain.toml, go.mod]
-- Build: `./build.sh`
-- [Anything a fresh clone needs to know.]
 
 ## Running it
+| Command 					| What it does										|
+|---------------------------|---------------------------------------------------|
+| `./run <file>` 			| [Executes a program. Available from Lab 4.] 		|
+| `./run --tokenize <file>` | [Prints the token stream.] 						|
+| `./run --parse <file>` 	| [Prints the parsed tree.] 						|
+| `./run --eval <file>` 	| [Evaluates each expression and prints its value.] |
+| `./run` 					| [Starts the REPL.]								|
 
+Exit codes: 
+  0		: [when]
+  65	: [when]
+  70	: [when]
 
-| Command | What it does |
-|---|---|
-| `./run <file>` | [Executes a program. Available from Lab 4.] |
-| `./run --tokenize <file>` | [Prints the token stream.] |
-| `./run --parse <file>` | [Prints the parsed tree.] |
-| `./run --eval <file>` | [Evaluates each expression and prints its value.] |
-| `./run` | [Starts the REPL.] |
-
-
-Exit codes: 0 [when], 65 [when], 70 [when].
 
 ## File extension
+  Ileto files are declared with the `.teic` file extension.
 
-`[.ext]` [Must match the `ext` field in every tests/lab*/manifest.json.]
 
-## Lexical structure
+# ============================================================================= #
+#                    THE ILETO PROJECT: Lexical Information                     #
+# ============================================================================= #
 
 ### Keywords
-
-
-| Keyword | Purpose |
-|---|---|
-| [word] | [what it does] |
+|---------------------------|---------------------------------------------------|
+| Keyword 					| What it does										|
+|---------------------------|---------------------------------------------------|
+| perhaps 					| variable declaration								|
+|                           | ex. perhaps int foo = 5;							|
+|---------------------------|---------------------------------------------------|
+| proclaim 					| constant declaration								|
+|                           | ex. proclaim int FOO = 5;							|
+|---------------------------|---------------------------------------------------|
+| provided					| if block declaration								|
+|---------------------------|---------------------------------------------------|
+| alternatively				| else if block declaration							|
+|---------------------------|---------------------------------------------------|
+| otherwise					| else block declaration							|
+|                           | ex. provided (foo == 5) { 						|
+|                           | 	      foo += 3;									|
+|                           | 	  } alternatively (foo == 4) { 					|
+|                           |         foo += 2;									|
+|                           | 	  } otherwise { 								|
+|                           | 	      foo -= 3;									|
+|                           | 	  } 											|
+|---------------------------|---------------------------------------------------|
+| whilst 					| while loop block declaration						|
+|                           | ex. whilst (i < 5) { 								|
+|                           | 	      i++;										|
+|                           | 	  } 											|
+|---------------------------|---------------------------------------------------|
+| for	 					| for loop block declaration						|
+|                           | ex. for (perhaps int i = 0; i < 5; i++) {			|
+|                           | 	      foo++;									|
+|                           | 	  } 											|
+|---------------------------|---------------------------------------------------|
+| amongst 					| foreach loop block declaration					|
+|                           | ex. amongst (int i within array) {				|
+|                           | 	      say(i);									|
+|                           | 	  } 											|
+|---------------------------|---------------------------------------------------|
 
 
 ### Operators
 
 
-| Operator | Category | Operands | Associativity | Precedence |
-|---|---|---|---|---|
+| Operator	| Category | Operands | Associativity | Precedence |
+|---		|---|---|---|---|
 | [op] | [arithmetic, comparison, logical, assignment, other] | [unary or binary] | [left, right, none] | [1 = loosest] |
 
 
