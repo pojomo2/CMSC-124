@@ -94,19 +94,22 @@ Exit codes:
 ### Literals
 
 
-| Kind | Syntax | Produces |
-|---|---|---|
-| [number] | [e.g. 42, 3.14] | [what runtime value] |
-| [string] | [e.g. "hello", escapes supported] | [what runtime value] |
-| [boolean] | [true, false] | [what runtime value] |
-| [nil] | [spelling] | [what runtime value] |
+| Kind        | Syntax                          | Produces    |
+| :---------: | :-----------------------------: | :---------: |
+| [interger]  | 	42, 0, -7                      | [Integer]   |
+| [string]    | e.g. "hello", escapes supported | [String]    |
+| [boolean]   | yea, nay                        | [Boolean]   |
+| [nil]       | spelling                        | [Nil]       |
+| [float]     | 3.14, 0.5, 2.0                  | [Float]     |
+| [character] | 'a'                             | [Character] |
+
 
 
 ### Identifiers
 
-- Start characters: [which]
-- Continue characters: [which]
-- Case-sensitive: [yes or no]
+- Start characters: Letters (a-z, A-Z) and underscore (_) — not digits
+- Continue characters: Letters, digits (0-9), and underscore
+- Case-sensitive: yes
 - [Reserved patterns, length limits, or other restrictions.]
 
 ### Comments
