@@ -110,22 +110,22 @@ Exit codes:
 - Start characters: Letters (a-z, A-Z) and underscore (_) — not digits
 - Continue characters: Letters, digits (0-9), and underscore
 - Case-sensitive: yes
-- [Reserved patterns, length limits, or other restrictions.]
+- No length limit for identifiers (aka variable names in my personal parlance). Identifiers cannot be a reserved keyword.
 
 ### Comments
 
-- Line comments: [token]
-- Block comments: [tokens, or "not supported"]
-- Nesting: [supported or not]
+- Line comments: `annotate` (everything from `annotate` to end of line is discarded)
+- Block comments: `/* ... */`
+- Nesting: not supported (a `*/` closes the nearest open `/*`, regardless of any `/*` inside it)
 - [Harness note: comment_prefix in tests/lab*/manifest.json is set to the
   token above.]
 
 ## Whitespace and termination
 
-- Whitespace significant: [yes or no, and where]
-- Statement terminator: [e.g. semicolon, newline, none]
-- Block delimiters: [e.g. braces, indentation]
-- Grouping delimiters: [e.g. parentheses]
+- Whitespace significant: no
+- Statement terminator: semicolon
+- Block delimiters: braces
+- Grouping delimiters: parentheses
 
 ## Token output format
 
