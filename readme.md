@@ -30,9 +30,9 @@
 | `./run` 					| [Starts the REPL.]								|
 
 Exit codes: 
-  0		: [when]
-  65	: [when]
-  70	: [when]
+  0		: file scanned/ran cleanly, no errors
+  65	: scanner rejected the file before running any of it (e.g. unterminated string, unexpected character)
+  70	: not applicable yet — reserved for runtime errors, starting Lab 3
 
 
 ## File extension
@@ -86,10 +86,31 @@ Exit codes:
 ### Operators
 
 
-| Operator	| Category | Operands | Associativity | Precedence |
-|---		|---|---|---|---|
-| [op] | [arithmetic, comparison, logical, assignment, other] | [unary or binary] | [left, right, none] | [1 = loosest] |
+### Operators
 
+### Operators
+
+| Operator | Category   | Operands | Associativity | Precedence |
+|----------|------------|----------|----------------|------------|
+| `=`      | assignment | binary   | right          | 1          |
+| `+=`     | assignment | binary   | right          | 1          |
+| `-=`     | assignment | binary   | right          | 1          |
+| `*=`     | assignment | binary   | right          | 1          |
+| `/=`     | assignment | binary   | right          | 1          |
+| `\|\|`   | logical    | binary   | left           | 2          |
+| `&&`     | logical    | binary   | left           | 3          |
+| `==`     | comparison | binary   | left           | 4          |
+| `!=`     | comparison | binary   | left           | 4          |
+| `<`      | comparison | binary   | left           | 5          |
+| `<=`     | comparison | binary   | left           | 5          |
+| `>`      | comparison | binary   | left           | 5          |
+| `>=`     | comparison | binary   | left           | 5          |
+| `+`      | arithmetic | binary   | left           | 6          |
+| `-`      | arithmetic | binary   | left           | 6          |
+| `*`      | arithmetic | binary   | left           | 7          |
+| `/`      | arithmetic | binary   | left           | 7          |
+| `!`      | logical    | unary    | right          | 8          |
+| `-`      | arithmetic | unary    | right          | 8          |
 
 ### Literals
 
