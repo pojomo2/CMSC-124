@@ -117,12 +117,12 @@ Exit codes:
 
 | Kind        | Syntax                          | Produces    |
 | :---------: | :-----------------------------: | :---------: |
-| [interger]  | 	42, 0, -7                      | [Integer]   |
-| [string]    | e.g. "hello", escapes supported | [String]    |
-| [boolean]   | yea, nay                        | [Boolean]   |
-| [nil]       | spelling                        | [Nil]       |
-| [float]     | 3.14, 0.5, 2.0                  | [Float]     |
-| [character] | 'a'                             | [Character] |
+| [interger]  | 	`42, 0, -7`                      | [Integer]   |
+| [string]    | `e.g. "hello", escapes supported` | [String]    |
+| [boolean]   | `yea`, `nay`                        | [Boolean]   |
+| [nil]       | `nil`                        | [Nil]       |
+| [float]     | `3.14`, `0.5`, `2.0`                  | [Float]     |
+| [character] | `'a'`                             | [Character] |
 
 
 
