@@ -8,6 +8,8 @@ The main pipeline implementation is written here.
 */
 
 
+Console.WriteLine("Hello, World!");
+
 if (args.Length > 1)
 {
 	Console.WriteLine("Usage: ./run [filename]. Exiting...");
