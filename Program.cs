@@ -17,7 +17,7 @@ if (args.Length > 1)
 }
 else if (args.Length == 1)
 {
-	Console.WriteLine($"Reading file at: {args[0]}");
+	// [temporary comment] Console.WriteLine($"Reading file at: {args[0]}");
 	System.Environment.Exit(0);
 }
 else
