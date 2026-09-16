@@ -1,7 +1,7 @@
-# ============================================================================= #
-#                          THE ILETO PROJECT: Overview                          #
-# ============================================================================= #
 
+
+# THE ILETO PROJECT
+# ___
 ## Creators
   - Drew T. Cudiamat 		(pojomo2)
   - Jared Ramyll D. Chua 	(ultramarine23)
@@ -39,49 +39,61 @@ Exit codes:
   Ileto files are declared with the `.teic` file extension.
 
 
-# ============================================================================= #
-#                    THE ILETO PROJECT: Lexical Information                     #
-# ============================================================================= #
+___
+# Lexical Information
 
 ### Keywords
-|---------------------------|---------------------------------------------------|
-| Keyword 					| What it does										|
-|---------------------------|---------------------------------------------------|
-| perhaps 					| variable declaration								|
-|                           | ex. perhaps int foo = 5;							|
-|---------------------------|---------------------------------------------------|
-| proclaim 					| constant declaration								|
-|                           | ex. proclaim int FOO = 5;							|
-|---------------------------|---------------------------------------------------|
-| provided					| if block declaration								|
-|---------------------------|---------------------------------------------------|
-| alternatively				| else if block declaration							|
-|---------------------------|---------------------------------------------------|
-| otherwise					| else block declaration							|
-|                           | ex. provided (foo == 5) { 						|
-|                           | 	      foo += 3;									|
-|                           | 	  } alternatively (foo == 4) { 					|
-|                           |         foo += 2;									|
-|                           | 	  } otherwise { 								|
-|                           | 	      foo -= 3;									|
-|                           | 	  } 											|
-|---------------------------|---------------------------------------------------|
-| whilst 					| while loop block declaration						|
-|                           | ex. whilst (i < 5) { 								|
-|                           | 	      i++;										|
-|                           | 	  } 											|
-|---------------------------|---------------------------------------------------|
-| for	 					| for loop block declaration						|
-|                           | ex. for (perhaps int i = 0; i < 5; i++) {			|
-|                           | 	      foo++;									|
-|                           | 	  } 											|
-|---------------------------|---------------------------------------------------|
-| amongst 					| foreach loop block declaration					|
-|                           | ex. amongst (int i within array) {				|
-|                           | 	      say(i);									|
-|                           | 	  } 											|
-|---------------------------|---------------------------------------------------|
+*Special Values*
+| keyword                                   | what it does                                                          |
+|-------------------------------------------|-----------------------------------------------------------------------|
+| `Yea`                                       | Boolean true value.                                                   |
+| `Nay`                                       | Boolean false value.                                                  |
+| `Nil`                                       | Represents the absence of a value.                          |
 
+
+*Variables, Functions and Classes*
+| keyword                                   | what it does                                                        |
+|-------------------------------------------|---------------------------------------------------------------------|
+| `var [name]`                                | Define a variable.                                                  |
+| `const [name]`                              | Define a variable with a constant value.                            |
+| `func [name] {}`                            | Declare a function block.                                           |
+| `requite [value]`                           | Immediately ends the current function and makes it return [value].  |
+| `class [name] {}`                           | Declare the start of an else block, with bounds defined by braces.  |
+
+*Logic and Membership*
+| keyword                                   | what it does                                                              |
+|-------------------------------------------|---------------------------------------------------------------------------|
+| `[value] in [collection]`                   | Returns Yea if [value] is a member of [collection]. Nay otherwise.        |
+| `[value] is [type]`                         | Returns Yea if value is of a certain primitive type. Nay otherwise.       |
+| `[value] inherits [class]`                  | Returns Yea if object is a descendant of a specific class. Nay otherwise. |
+| `[exp] or [exp]`                            | Returns Yea if either expression is true. Nay otherwise.                  |
+| `[exp] and [exp]`                           | Returns Yea if both expressions are true. Nay otherwise.                  |
+| `not [exp]`                                 | Returns Yea if the expression is false. Nay if the expression is true.    |
+
+
+*Control Flow and Loops*
+
+| keyword                                   | what it does                                                           |
+|-------------------------------------------|------------------------------------------------------------------------|
+| `whilst ([condition]) {}`                   | Declare the start of a while loop, with bounds defined by braces.      |
+| `for ([name]; [condition]; [increment]) {}` | Declare the start of a for loop, with bounds defined by braces.        |
+| `amongst ([name] in [iterable]) {}`         | Declare the start of a foreach loop, with bounds defined by braces.    |
+| `desist`                                    | End the current loop.                                                  |
+| `proceed`                                   | Automatically skip the current iteration of the current loop,          |
+| `not [exp]`                                 | Returns Yea if the expression is false. Nay if the expression is true. |
+| `provided ([condition]) {}`                 | Declare the start of an if block, with bounds defined by braces.       |
+| `yet provided ([condition]) {}`             | Declare the start of an else if block, with bounds defined by braces.  |
+| `otherwise {}`                              | Declare the start of an else block, with bounds defined by braces.     |
+
+*Event-Related*
+
+| keyword             | what it does                                                |
+|---------------------|-------------------------------------------------------------|
+| `proclamation [name]` | Define an event.                                            |
+| `proclaim [name]`     | Publish an event.                                           |
+| `upon [name] {}`      | Define a listening anonymous function to an event.          |
+| `observe ([name]) {}` | Define a listening anonymous function to a variable change. |
+*
 
 ### Operators
 
@@ -111,9 +123,55 @@ Exit codes:
 | `/`      | arithmetic | binary   | left           | 7          |
 | `!`      | logical    | unary    | right          | 8          |
 | `-`      | arithmetic | unary    | right          | 8          |
+*Arithmetic Operators*
+Operator | Category                             | Operands          | Associativity       | Precedence    |
+|----------|--------------------------------------|-------------------|---------------------|---------------|
+| `a + b`    | arithmetic                           | binary            | left                | 4             |
+| `a - b`    | arithmetic                           | binary            | left                | 4             |
+| `a * b`    | arithmetic                           | binary            | left                | 5             |
+| `a / b`    | arithmetic                           | binary            | left                | 5             |
+| `a // b`   | arithmetic                           | binary            | left                | 5             |
+| `a % b`    | arithmetic                           | binary            | left                | 5             |
+| `-a`       | arithmetic                           | unary             | right               | 3             |
+
+*Assignment Operators*
+| Operator  | Category                                             | Operands          | Associativity       | Precedence    |
+|-----------|------------------------------------------------------|-------------------|---------------------|---------------|
+| `a = b`   | assignment                                           | binary            | right               | 7             |
+| `a += b`  | assignment                                           | binary            | none                | 7             |
+| `a -= b`  | assignment                                           | binary            | none                | 7             |
+| `a *= b`  | assignment                                           | binary            | none                | 7             |
+| `a /= b`  | assignment                                           | binary            | none                | 7             |
+| `a //= b` | assignment                                           | binary            | none                | 7             |
+| `a %= b`  | assignment                                           | binary            | none                | 7             |
+
+*Comparison Operators*
+| Operator | Category       | Operands          | Associativity       | Precedence    |
+|----------|----------------|-------------------|---------------------|---------------|
+| `a == b` | comparison     | binary            | left                | 5             |
+| `a != b` | comparison     | binary            | left                | 5             |
+| `a > b`  | comparison     | binary            | left                | 5             |
+| `a >= b` | comparison     | binary            | left                | 5             |
+| `a < b`  | comparison     | binary            | left                | 5             |
+| `a <= b` | comparison     | binary            | left                | 5             |
+| `a %= b` | comparison     | binary            | left                | 5             |
+
+*Logical Operators*
+
+*Other Operators*
+
+
 
 ### Literals
 
+<<<<<<< HEAD
+| Kind | Syntax | Produces |
+|---|---|---|
+| [number] | [e.g. 42, 3.14] | [what runtime value] |
+| [string] | [e.g. "hello", escapes supported] | [what runtime value] |
+| [boolean] | [true, false] | [what runtime value] |
+| [nil] | [spelling] | [what runtime value] |
+=======
 
 | Kind        | Syntax                          | Produces    |
 | :---------: | :-----------------------------: | :---------: |
@@ -124,6 +182,7 @@ Exit codes:
 | [float]     | `3.14`, `0.5`, `2.0`                  | [Float]     |
 | [character] | `'a'`                             | [Character] |
 
+>>>>>>> d3536afabefec79fcc1b1b0ed615d9977bd70c4b
 
 
 ### Identifiers
