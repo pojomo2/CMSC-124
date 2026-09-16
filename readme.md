@@ -137,35 +137,48 @@ Operator | Category                             | Operands          | Associativ
 
 ### Literals
 
+<<<<<<< HEAD
 | Kind | Syntax | Produces |
 |---|---|---|
 | [number] | [e.g. 42, 3.14] | [what runtime value] |
 | [string] | [e.g. "hello", escapes supported] | [what runtime value] |
 | [boolean] | [true, false] | [what runtime value] |
 | [nil] | [spelling] | [what runtime value] |
+=======
+
+| Kind        | Syntax                          | Produces    |
+| :---------: | :-----------------------------: | :---------: |
+| [interger]  | 	42, 0, -7                      | [Integer]   |
+| [string]    | e.g. "hello", escapes supported | [String]    |
+| [boolean]   | yea, nay                        | [Boolean]   |
+| [nil]       | spelling                        | [Nil]       |
+| [float]     | 3.14, 0.5, 2.0                  | [Float]     |
+| [character] | 'a'                             | [Character] |
+
+>>>>>>> d3536afabefec79fcc1b1b0ed615d9977bd70c4b
 
 
 ### Identifiers
 
-- Start characters: [which]
-- Continue characters: [which]
-- Case-sensitive: [yes or no]
-- [Reserved patterns, length limits, or other restrictions.]
+- Start characters: Letters (a-z, A-Z) and underscore (_) — not digits
+- Continue characters: Letters, digits (0-9), and underscore
+- Case-sensitive: yes
+- No length limit for identifiers (aka variable names in my personal parlance). Identifiers cannot be a reserved keyword.
 
 ### Comments
 
-- Line comments: [token]
-- Block comments: [tokens, or "not supported"]
-- Nesting: [supported or not]
+- Line comments: `annotate` (everything from `annotate` to end of line is discarded)
+- Block comments: `/* ... */`
+- Nesting: not supported (a `*/` closes the nearest open `/*`, regardless of any `/*` inside it)
 - [Harness note: comment_prefix in tests/lab*/manifest.json is set to the
   token above.]
 
 ## Whitespace and termination
 
-- Whitespace significant: [yes or no, and where]
-- Statement terminator: [e.g. semicolon, newline, none]
-- Block delimiters: [e.g. braces, indentation]
-- Grouping delimiters: [e.g. parentheses]
+- Whitespace significant: no
+- Statement terminator: semicolon
+- Block delimiters: braces
+- Grouping delimiters: parentheses
 
 ## Token output format
 
