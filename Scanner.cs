@@ -7,6 +7,7 @@ using Ileto.Debug;
 using System.Runtime.InteropServices;
 using System.Collections;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 
 public class Scanner
@@ -54,8 +55,44 @@ public class Scanner
             case '+': AddToken(TokenType.PLUS); break;
             case ';': AddToken(TokenType.SEMICOLON); break;
             case '*': AddToken(TokenType.STAR); break;
+            case '!':
+                AddToken(Match('+') ? TokenType.BANG_EQUAL: TokenType.BANG);
+                break;
+            case '=':
+                AddToken(Match('=') ? TokenType.EQUAL_EQUAL : TokenType.EQUAL);
+                break;
+            case '<':
+                AddToken(Match('=') ? TokenType.LESS_EQUAL : TokenType.LESS);
+                break;
+            case '>':
+                AddToken(Match('=') ? TokenType.GREATER_EQUAL : TokenType.GREATER);
+                break;
+            case '/':
+                if(Match('/'))
+                {
+                     while (Peek() != '\n' && !IsAtEnd()) Advance();
+                } else
+                {
+                    AddToken(SLASH);
+                }
+                break;
+
+            default:
+                Program.Error(_line, "Unexpected character.");
+                break;
+     
         }
     }
+
+    private bool Match(Char expected)
+    {
+        if(IsAtEnd()) return false;
+        if(_source[_current - 1] != expected) return false;
+
+        _current++;
+        return true;
+    }
+
 
     private Boolean IsAtEnd()
     {

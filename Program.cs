@@ -1,43 +1,72 @@
-﻿using System;
-using Ileto;
-using Ileto.Debug;
+using System;
+using System.IO;
+using System.Collections.Generic;
 
-/* {white}
-Program.cs acts as the interpreter's entry point. 
-The main pipeline implementation is written here.
-*/
-
-
-Console.WriteLine("Hello, World!");
-
-if (args.Length > 1)
+namespace Ileto
 {
-	Console.WriteLine("Usage: ./run [filename]. Exiting...");
-	System.Environment.Exit(65);
-}
-else if (args.Length == 1)
-{
-	// [temporary comment] Console.WriteLine($"Reading file at: {args[0]}");
-	System.Environment.Exit(0);
-}
-else
-{
-	// run CLI code editor
-	TokenPrinter tokenPrinter = new TokenPrinter();
+    public class Program
+    {
+    static bool HadError = false;
+    static void Main(string[] args)
+    {
+        if (args.Length > 1)
+        {
+            Console.WriteLine("Usage: Ileto [script]");
+            Environment.Exit(64);
+        }
+        else if (args.Length == 1)
+        {
+            //RunFile(args[0]);
+            Console.WriteLine("Hello, world!");
+        }
+        else
+        {
+            RunPrompt();
+        }
+    }
 
-	for (;;)
-	{
-		Console.Write(">> ");
-		string? codeLine = Console.ReadLine();
+    static void RunFile(string path)
+    {
+        string source = File.ReadAllText(path);
+        Run(source);
 
-		if (codeLine == null)
-		{
-			Console.WriteLine("\nEOF detected. Exiting...");
-			break;
-		}
+        if (HadError)
+            Environment.Exit(65);
+    }
 
-		Scanner newScanner = new Scanner(codeLine);
-		List<Token> tokens = newScanner.ScanTokens();
-		tokenPrinter.PrintTokens(tokens);
-	}
+    static void RunPrompt()
+    {
+        for (;;)
+        {
+            Console.Write("> ");
+            string? line = Console.ReadLine();
+            if (line == null) break;
+            Run(line);
+            HadError = false;
+        }
+    }
+
+    private static void Run(string source)
+    {
+        Scanner scanner = new Scanner(source);
+        List<Token> tokens = scanner.ScanTokens();
+
+        foreach (Token token in tokens)
+        {
+            Console.WriteLine(token);
+        }
+    }
+
+    public static void Error(int line, string message)
+    {
+        Report(line, "", message);
+    }
+
+    private static void Report(int line, string where, string message)
+    {
+        Console.Error.WriteLine("[line " + line + "] Error" + where + ": " + message);
+        HadError = true;
+    }
+    }
 }
+
