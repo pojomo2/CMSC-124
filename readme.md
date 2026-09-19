@@ -95,10 +95,6 @@ ___
 | `observe ([name]) {}` | Define a listening anonymous function to a variable change. |
 *
 
-### Operators
-
-
-### Operators
 
 ### Operators
 
@@ -164,14 +160,6 @@ Operator | Category                             | Operands          | Associativ
 
 ### Literals
 
-<<<<<<< HEAD
-| Kind | Syntax | Produces |
-|---|---|---|
-| [number] | [e.g. 42, 3.14] | [what runtime value] |
-| [string] | [e.g. "hello", escapes supported] | [what runtime value] |
-| [boolean] | [true, false] | [what runtime value] |
-| [nil] | [spelling] | [what runtime value] |
-=======
 
 | Kind        | Syntax                          | Produces    |
 | :---------: | :-----------------------------: | :---------: |
@@ -182,7 +170,6 @@ Operator | Category                             | Operands          | Associativ
 | [float]     | `3.14`, `0.5`, `2.0`                  | [Float]     |
 | [character] | `'a'`                             | [Character] |
 
->>>>>>> d3536afabefec79fcc1b1b0ed615d9977bd70c4b
 
 
 ### Identifiers
