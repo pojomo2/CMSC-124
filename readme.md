@@ -30,9 +30,9 @@
 | `./run` 					| [Starts the REPL.]								|
 
 Exit codes: 
-  0		: [when]
-  65	: [when]
-  70	: [when]
+  0		: file scanned/ran cleanly, no errors
+  65	: scanner rejected the file before running any of it (e.g. unterminated string, unexpected character)
+  70	: not applicable yet — reserved for runtime errors, starting Lab 3
 
 
 ## File extension
@@ -95,7 +95,30 @@ ___
 | `observe ([name]) {}` | Define a listening anonymous function to a variable change. |
 *
 
+
 ### Operators
+
+| Operator | Category   | Operands | Associativity | Precedence |
+|----------|------------|----------|----------------|------------|
+| `=`      | assignment | binary   | right          | 1          |
+| `+=`     | assignment | binary   | right          | 1          |
+| `-=`     | assignment | binary   | right          | 1          |
+| `*=`     | assignment | binary   | right          | 1          |
+| `/=`     | assignment | binary   | right          | 1          |
+| `\|\|`   | logical    | binary   | left           | 2          |
+| `&&`     | logical    | binary   | left           | 3          |
+| `==`     | comparison | binary   | left           | 4          |
+| `!=`     | comparison | binary   | left           | 4          |
+| `<`      | comparison | binary   | left           | 5          |
+| `<=`     | comparison | binary   | left           | 5          |
+| `>`      | comparison | binary   | left           | 5          |
+| `>=`     | comparison | binary   | left           | 5          |
+| `+`      | arithmetic | binary   | left           | 6          |
+| `-`      | arithmetic | binary   | left           | 6          |
+| `*`      | arithmetic | binary   | left           | 7          |
+| `/`      | arithmetic | binary   | left           | 7          |
+| `!`      | logical    | unary    | right          | 8          |
+| `-`      | arithmetic | unary    | right          | 8          |
 *Arithmetic Operators*
 Operator | Category                             | Operands          | Associativity       | Precedence    |
 |----------|--------------------------------------|-------------------|---------------------|---------------|
@@ -137,25 +160,16 @@ Operator | Category                             | Operands          | Associativ
 
 ### Literals
 
-<<<<<<< HEAD
-| Kind | Syntax | Produces |
-|---|---|---|
-| [number] | [e.g. 42, 3.14] | [what runtime value] |
-| [string] | [e.g. "hello", escapes supported] | [what runtime value] |
-| [boolean] | [true, false] | [what runtime value] |
-| [nil] | [spelling] | [what runtime value] |
-=======
 
 | Kind        | Syntax                          | Produces    |
 | :---------: | :-----------------------------: | :---------: |
-| [interger]  | 	42, 0, -7                      | [Integer]   |
-| [string]    | e.g. "hello", escapes supported | [String]    |
-| [boolean]   | yea, nay                        | [Boolean]   |
-| [nil]       | spelling                        | [Nil]       |
-| [float]     | 3.14, 0.5, 2.0                  | [Float]     |
-| [character] | 'a'                             | [Character] |
+| [interger]  | 	`42, 0, -7`                      | [Integer]   |
+| [string]    | `e.g. "hello", escapes supported` | [String]    |
+| [boolean]   | `yea`, `nay`                        | [Boolean]   |
+| [nil]       | `nil`                        | [Nil]       |
+| [float]     | `3.14`, `0.5`, `2.0`                  | [Float]     |
+| [character] | `'a'`                             | [Character] |
 
->>>>>>> d3536afabefec79fcc1b1b0ed615d9977bd70c4b
 
 
 ### Identifiers
