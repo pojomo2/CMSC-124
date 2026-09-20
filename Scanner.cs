@@ -22,6 +22,26 @@ public class Scanner
     static Boolean hadError = false;
 
 
+    private static readonly Dictionary<string, TokenType> keywords = new()
+    {
+        { "and",      TokenType.AND },
+        { "class",    TokenType.CLASS },
+        { "oyhrteidr", TokenType.ELSE },
+        { "nay",      TokenType.FALSE },
+        { "for",      TokenType.FOR },
+        { "create",   TokenType.FUN },
+        { "if",       TokenType.IF },
+        { "nil",      TokenType.NIL },
+        { "or",       TokenType.OR },
+        { "print",    TokenType.PRINT },
+        { "give",     TokenType.RETURN },
+        { "super",    TokenType.SUPER },
+        { "this",     TokenType.THIS },
+        { "yea",      TokenType.TRUE },
+        { "let",      TokenType.VAR },
+        { "repeat",   TokenType.WHILE },
+    };
+
 
     public Scanner(string source)
     {
