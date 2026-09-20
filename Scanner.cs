@@ -133,7 +133,12 @@ public class Scanner
     {
         while (IsAlphaNumeric(Peek())) Advance();
 
-        AddToken(TokenType.IDENTIFIER);
+        String text = _source[_start.._current];
+        TokenType type = keywords.TryGetValue(text, out var keywordType)
+            ? keywordType
+            : TokenType.IDENTIFIER;
+
+        AddToken(type);
     }
 
     private void Number()
