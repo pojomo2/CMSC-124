@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Collections;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Data.Common;
 
 
 public class Scanner
@@ -73,16 +74,86 @@ public class Scanner
                      while (Peek() != '\n' && !IsAtEnd()) Advance();
                 } else
                 {
-                    AddToken(SLASH);
+                    AddToken(TokenType.SLASH);
                 }
                 break;
 
-            default:
-                Program.Error(_line, "Unexpected character.");
+            case ' ':
+            case '\r':
+            case '\t':
+                //ignore white space
                 break;
+            case '\n':
+                _line++;
+                break;
+
+            case '"': String(); break;
+
+            default:
+                if (IsDigit(c))
+                {
+                    Number();
+                } 
+                else if (IsAlpha(c))
+                {
+                    Identifier();
+                }
+                else
+                {
+                    Program.Error(_line, "Unexpected character.");
+                }
+                break;
+
+
      
         }
     }
+
+    private void Identifier()
+    {
+        while (IsAlphaNumeric(Peek())) Advance();
+
+        AddToken(TokenType.IDENTIFIER);
+    }
+
+    private void Number()
+    {
+        while (IsDigit(Peek())) Advance();
+
+        //look for decimal dot
+        if (Peek() == '.' && IsDigit(PeekNext()))
+        {
+            //Consume the "."
+            Advance();
+
+            while(IsDigit(Peek())) Advance();
+        }
+
+        AddToken(TokenType.NUMBER, Double.Parse(_source.Substring(_start, _current - _start)));
+    }
+
+    private void String()
+    {
+        while (Peek() != '"' && !IsAtEnd())
+        {
+            if (Peek() == '\n') _line++;
+            Advance();
+        }
+
+        if(IsAtEnd())
+        {
+            Program.Error(_line, "Untermianted string.");
+            return;
+        }
+
+        //the closing ".
+
+        Advance();
+
+        String value = _source.Substring(_start + 1, _current - 1);
+        
+    }
+
 
     private bool Match(Char expected)
     {
@@ -92,6 +163,37 @@ public class Scanner
         _current++;
         return true;
     }
+
+    private Char Peek()
+    {
+        if (IsAtEnd()) return '\0';
+        return _source[_current - 1];
+    }
+
+    private Char PeekNext()
+    {
+        if(_current + 1 >= _source.Length) return '\0';
+        return _source[_current + 1];
+
+    }
+
+    private bool IsAlpha(Char c)
+    {
+        return (c >= 'a' && c <= 'z') || 
+               (c >= 'A' && c <= 'Z') ||
+               c == '_';
+    }
+
+    private bool IsAlphaNumeric(Char c)
+    {
+        return IsAlpha(c) || IsDigit(c);
+    }
+
+    private bool IsDigit(Char c)
+    {
+        return c >= '0' && c <= '9';
+    }
+
 
 
     private Boolean IsAtEnd()
