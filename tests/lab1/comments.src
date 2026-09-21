@@ -1,0 +1,5 @@
+annotate This entire line is a comment
+var x = 10; annotate trailing comment
+/* Multi-line
+   block comment */
+const y = 20;

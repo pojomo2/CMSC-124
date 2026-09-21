@@ -1,0 +1,6 @@
+var count = 42;
+var pi = 3.14;
+var msg = "hello";
+var ch = 'a';
+count += 5;
+count //= 2;

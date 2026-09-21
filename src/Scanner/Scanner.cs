@@ -115,6 +115,7 @@ public class Scanner
                 break;
 
             case '"': String(); break;
+            case '\'': Character(); break;
 
             default:
                 if (IsDigit(c))
@@ -185,6 +186,33 @@ public class Scanner
         String value = _source.Substring(_start + 1, _current - _start - 2);
         AddToken(TokenType.STRING, value);
         
+    }
+
+    private void Character()
+    {
+        while(Peek() != '\'' && !IsAtEnd())
+        {
+            if (Peek() == '\n') _line++;
+            Advance();
+        }
+
+        if (IsAtEnd())
+        {
+            Program.Error(_line, "Unterminated character.");
+            return;
+        }
+
+        Advance(); //the closing '
+
+        string value = _source.Substring(_start + 1, _current - _start - 2);
+
+        if (value.Length != 1)
+        {
+            Program.Error(_line, "Character literal must contain exactly one character.");
+            return;
+        }
+
+        AddToken(TokenType.CHARACTER, value[0]);
     }
 
 

@@ -1,0 +1,11 @@
+provided (x > 0) {
+    requite Yea;
+} yet provided (x == 0) {
+    requite Nay;
+} otherwise {
+    requite Nil;
+}
+
+whilst (Yea) {
+    desist;
+}
