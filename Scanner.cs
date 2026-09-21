@@ -24,22 +24,38 @@ public class Scanner
 
     private static readonly Dictionary<string, TokenType> keywords = new()
     {
-        { "and",      TokenType.AND },
-        { "class",    TokenType.CLASS },
-        { "otherwise", TokenType.ELSE },
-        { "nay",      TokenType.FALSE },
-        { "for",      TokenType.FOR },
-        { "create",   TokenType.FUN },
-        { "if",       TokenType.IF },
-        { "nil",      TokenType.NIL },
-        { "or",       TokenType.OR },
-        { "say",    TokenType.PRINT },
-        { "give",     TokenType.RETURN },
-        { "super",    TokenType.SUPER },
-        { "this",     TokenType.THIS },
-        { "yea",      TokenType.TRUE },
-        { "let",      TokenType.VAR },
-        { "repeat",   TokenType.WHILE },
+        // Special values
+        { "Yea",          TokenType.TRUE },
+        { "Nay",          TokenType.FALSE },
+        { "Nil",          TokenType.NIL },
+
+        // Variables, functions, classes
+        { "var",          TokenType.VAR },
+        { "const",        TokenType.CONST },
+        { "func",         TokenType.FUNC },
+        { "requite",      TokenType.RETURN },
+        { "class",        TokenType.CLASS },
+
+        // Logic and membership
+        { "in",           TokenType.IN },
+        { "is",           TokenType.IS },
+        { "inherits",     TokenType.INHERITS },
+
+        // Control flow and loops
+        { "whilst",       TokenType.WHILE },
+        { "for",          TokenType.FOR },
+        { "amongst",      TokenType.FOREACH },
+        { "desist",       TokenType.BREAK },
+        { "proceed",      TokenType.CONTINUE },
+        { "provided",     TokenType.IF },
+        { "yet",          TokenType.YET },        // "yet provided" = else-if, parser combines these
+        { "otherwise",    TokenType.ELSE },
+
+        // Event-related
+        { "proclamation", TokenType.PROCLAMATION },
+        { "proclaim",     TokenType.PROCLAIM },
+        { "upon",         TokenType.UPON },
+        { "observe",      TokenType.OBSERVE },
     };
 
 
@@ -77,7 +93,7 @@ public class Scanner
             case ';': AddToken(TokenType.SEMICOLON); break;
             case '*': AddToken(TokenType.STAR); break;
             case '!':
-                AddToken(Match('+') ? TokenType.BANG_EQUAL: TokenType.BANG);
+                AddToken(Match('=') ? TokenType.BANG_EQUAL: TokenType.BANG);
                 break;
             case '=':
                 AddToken(Match('=') ? TokenType.EQUAL_EQUAL : TokenType.EQUAL);
