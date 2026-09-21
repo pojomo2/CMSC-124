@@ -1,5 +1,6 @@
 {
   "ext": ".teic",
+  "flag": "--tokenize",
   "mode": "sidecar",
   "run_entrypoint": "./run"
 }
