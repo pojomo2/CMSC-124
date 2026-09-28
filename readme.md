@@ -58,14 +58,12 @@ ___
 | `const [name]`                              | Define a variable with a constant value.                            |
 | `func [name] {}`                            | Declare a function block.                                           |
 | `requite [value]`                           | Immediately ends the current function and makes it return [value].  |
-| `class [name] {}`                           | Declare the start of an else block, with bounds defined by braces.  |
 
 *Logic and Membership*
 | keyword                                   | what it does                                                              |
 |-------------------------------------------|---------------------------------------------------------------------------|
 | `[value] in [collection]`                   | Returns Yea if [value] is a member of [collection]. Nay otherwise.        |
 | `[value] is [type]`                         | Returns Yea if value is of a certain primitive type. Nay otherwise.       |
-| `[value] inherits [class]`                  | Returns Yea if object is a descendant of a specific class. Nay otherwise. |
 | `[exp] or [exp]`                            | Returns Yea if either expression is true. Nay otherwise.                  |
 | `[exp] and [exp]`                           | Returns Yea if both expressions are true. Nay otherwise.                  |
 | `not [exp]`                                 | Returns Yea if the expression is false. Nay if the expression is true.    |
