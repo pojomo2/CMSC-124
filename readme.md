@@ -316,8 +316,9 @@ approval of your own work.]
 
 ## Known limitations
 
-- [What doesn't work, what is unimplemented, where behavior is worse than you
-  would like.]
+- Array syntax remains unimplemented.
+- Multi-line comments remains unimplemented.
+
 
 ## Changelog
 

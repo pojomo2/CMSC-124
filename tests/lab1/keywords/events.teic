@@ -1,0 +1,8 @@
+var count = 5;
+proclamation count_changed;
+
+proclaim count_changed;
+
+upon (count_changed) {
+	say "The count has changed.";
+}
