@@ -1,0 +1,6 @@
+var x = 5 // comment
+annotate this is discarded
+var y = 10
+/* block
+comment */
+var z = 15

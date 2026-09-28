@@ -98,8 +98,17 @@ public class Scanner
             case '/':
                 if(Match('/'))
                 {
-                     while (Peek() != '\n' && !IsAtEnd()) Advance();
-                } else
+                    AddToken(Match('=') ? TokenType.SLASH_SLASH_EQUAL: TokenType.SLASH_SLASH);
+                }
+                else if (Match('*'))
+                {
+                    BlockComment();
+                }
+                else if (Match('='))
+                {
+                    AddToken(TokenType.SLASH_EQUAL);
+                }
+                else
                 {
                     AddToken(TokenType.SLASH);
                 }
@@ -142,6 +151,13 @@ public class Scanner
         while (IsAlphaNumeric(Peek())) Advance();
 
         String text = _source[_start.._current];
+
+        if (text == "annotate")
+        {
+            while (Peek() != '\n' && !IsAtEnd()) Advance();
+            return; //discard, no token added
+        }
+
         TokenType type = keywords.TryGetValue(text, out var keywordType)
             ? keywordType
             : TokenType.IDENTIFIER;
@@ -213,6 +229,25 @@ public class Scanner
         }
 
         AddToken(TokenType.CHARACTER, value[0]);
+    }
+
+    private void BlockComment()
+    {
+        while(!(Peek() == '*' && PeekNext() == '/') && !IsAtEnd())
+        {
+            if (Peek() == '\n') _line++;
+            Advance();
+        } 
+
+        if (IsAtEnd())
+        {
+            Program.Error(_line, "Unterminated block comment.");
+            return;
+        }
+
+        Advance(); // consume '*'
+        Advance(); // consume '/'
+        // no AddToken - comments are discarded, not tokenized
     }
 
 
