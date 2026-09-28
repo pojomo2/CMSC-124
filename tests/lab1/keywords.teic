@@ -1,0 +1,59 @@
+var agree = Yea;
+var disagree = Nay;
+var empty = Nil;
+
+const UNCHANGEABLE = 5;
+
+class Parent
+{
+	var age = 50;
+	var belonging = [];
+}
+
+class Child inherits Parent
+{
+	func Foo() 
+	{
+		provided (age == 40) 
+		{
+			requite 3;
+		} 
+		yet (age is integer) 
+		{
+			requite 4;
+		}
+		otherwise 
+		{
+			requite 5;
+		}
+	}
+}
+
+
+var terrance = new Child();
+
+whilst (terrance.age < 50) 
+{
+	terrance.age += 1;
+	provided (terrance.age == 45) 
+	{
+		desist;
+	}
+}
+
+
+
+
+        // Control flow and loops
+        { "for",          TokenType.FOR },
+        { "amongst",      TokenType.FOREACH },
+        { "proceed",      TokenType.CONTINUE },
+        { "provided",     TokenType.IF },
+        { "yet",          TokenType.YET },        // "yet provided" = else-if, parser combines these
+        { "otherwise",    TokenType.ELSE },
+
+        // Event-related
+        { "proclamation", TokenType.PROCLAMATION },
+        { "proclaim",     TokenType.PROCLAIM },
+        { "upon",         TokenType.UPON },
+        { "observe",      TokenType.OBSERVE },
