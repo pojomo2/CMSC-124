@@ -20,7 +20,7 @@ public enum TokenType
     SLASH_SLASH_EQUAL, PERCENT_EQUAL,
 
     // Literals.
-    IDENTIFIER, STRING, NUMBER, CHARACTER,
+    IDENTIFIER, STRING, NUMBER, CHARACTER, LEFT_BRACKET, RIGHT_BRACKET,
 
     // Keywords — special values.
     TRUE, FALSE, NIL, AND, OR, NOT,
@@ -36,6 +36,9 @@ public enum TokenType
 
     // Keywords — event-related.
     PROCLAMATION, PROCLAIM, UPON, OBSERVE,
+
+    // Keywords — built-in type names used by the `is` operator.
+    INTEGER, FLOAT, BOOLEAN, CHAR, STRING_TYPE,
 
     EOF
 }

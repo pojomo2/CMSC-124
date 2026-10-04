@@ -52,6 +52,11 @@ public class Scanner
         { "proclaim",     TokenType.PROCLAIM },
         { "upon",         TokenType.UPON },
         { "observe",      TokenType.OBSERVE },
+        { "Integer", TokenType.INTEGER },
+        { "Float", TokenType.FLOAT },
+        { "Boolean", TokenType.BOOLEAN },
+        { "Char", TokenType.CHAR },
+        { "String", TokenType.STRING_TYPE },
     };
 
 
@@ -104,6 +109,12 @@ public class Scanner
                 break;
             case ';':
                 AddToken(TokenType.SEMICOLON);
+                break;
+            case '[':
+                AddToken(TokenType.LEFT_BRACKET);
+                break;
+            case ']':
+                AddToken(TokenType.RIGHT_BRACKET);
                 break;
             case '*':
                 AddToken(Match('=') ? TokenType.STAR_EQUAL : TokenType.STAR);
@@ -264,7 +275,6 @@ public class Scanner
 
         Advance(); //the closing ".
 
-        String value = _source.Substring(_start + 1, _current - _start - 2);
         AddToken(TokenType.STRING, value);
         
     }
