@@ -1,0 +1,15 @@
+var number = 0;
+
+whilst (number < 10) {
+	number += 1;
+	provided (number == 8) {
+		desist;
+	}
+}
+
+for (var i; i < 10; i++) {
+	provided (i % 2 == 1) {
+		proceed;
+	}
+	say i;
+}

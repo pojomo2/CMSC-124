@@ -1,0 +1,9 @@
+# This is a comment
+
+# Force all text files to normalize line endings
+* text=auto
+
+# End-of-line normalization for specific files (so that it doesn't mess up testing)
+*.teic text eol=lf
+*.expected text eol=lf
+*.out text eol=lf

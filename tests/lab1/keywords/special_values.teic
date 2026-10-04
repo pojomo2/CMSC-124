@@ -1,0 +1,3 @@
+var agree = Yea;
+var disagree = Nay;
+var empty = Nil;

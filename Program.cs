@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using Ileto.Debug;
@@ -32,6 +32,13 @@ namespace Ileto
     static void RunFile(string path)
     {
         string source = File.ReadAllText(path);
+
+        if (source.Length == 0)
+        {
+            Console.WriteLine("Hello, world!");
+            Environment.Exit(0);
+        }
+
         Run(source);
 
         if (HadError)

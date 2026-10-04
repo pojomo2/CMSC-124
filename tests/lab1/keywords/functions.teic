@@ -1,0 +1,7 @@
+func add() {
+	requite (1 + 2);
+}
+
+func add_custom(var a, var b) {
+	requite (a + b);
+}
