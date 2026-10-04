@@ -148,7 +148,7 @@ Operator | Category                             | Operands          | Associativ
 
 | Kind        | Syntax                          | Produces    |
 | :---------: | :-----------------------------: | :---------: |
-| [interger]  | 	42, 0, -7                      | [Integer]   |
+| [integer]  | 	42, 0, 7                      | [Integer]   |
 | [string]    | e.g. "hello", escapes supported | [String]    |
 | [boolean]   | yea, nay                        | [Boolean]   |
 | [nil]       | spelling                        | [Nil]       |

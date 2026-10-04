@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Text;
 using Ileto;
 namespace Ileto;
 
@@ -31,6 +33,9 @@ public class Scanner
         { "in",           TokenType.IN },
         { "is",           TokenType.IS },
         { "inherits",     TokenType.INHERITS },
+        { "and", TokenType.AND},
+        { "or", TokenType.OR},
+        {"NOT", TokenType.NOT},
 
         // Control flow and loops
         { "whilst",       TokenType.WHILE },
@@ -73,18 +78,38 @@ public class Scanner
         char c = Advance();
         switch(c)
         {
-            case '(': AddToken(TokenType.LEFT_PAREN); break;
-            case ')': AddToken(TokenType.RIGHT_PAREN); break;
-            case '{': AddToken(TokenType.LEFT_BRACE); break;
-            case '}': AddToken(TokenType.RIGHT_BRACE); break;
-            case ',': AddToken(TokenType.COMMA); break;
-            case '.': AddToken(TokenType.DOT); break;
-            case '-': AddToken(TokenType.MINUS); break;
-            case '+': AddToken(TokenType.PLUS); break;
-            case ';': AddToken(TokenType.SEMICOLON); break;
-            case '*': AddToken(TokenType.STAR); break;
+            case '(':
+                AddToken(TokenType.LEFT_PAREN);
+                break;
+            case ')':
+                AddToken(TokenType.RIGHT_PAREN);
+                break;
+            case '{':
+                AddToken(TokenType.LEFT_BRACE);
+                break;
+            case '}':
+                AddToken(TokenType.RIGHT_BRACE);
+                break;
+            case ',':
+                AddToken(TokenType.COMMA);
+                break;
+            case '.':
+                AddToken(TokenType.DOT);
+                break;
+            case '-':
+                AddToken(Match('=') ? TokenType.MINUS_EQUAL : TokenType.MINUS);
+                break;
+            case '+':
+                AddToken(Match('=') ? TokenType.PLUS_EQUAL : TokenType.PLUS);
+                break;
+            case ';':
+                AddToken(TokenType.SEMICOLON);
+                break;
+            case '*':
+                AddToken(Match('=') ? TokenType.STAR_EQUAL : TokenType.STAR);
+                break;
             case '!':
-                AddToken(Match('=') ? TokenType.BANG_EQUAL: TokenType.BANG);
+                AddToken(Match('=') ? TokenType.BANG_EQUAL : TokenType.BANG);
                 break;
             case '=':
                 AddToken(Match('=') ? TokenType.EQUAL_EQUAL : TokenType.EQUAL);
@@ -94,6 +119,9 @@ public class Scanner
                 break;
             case '>':
                 AddToken(Match('=') ? TokenType.GREATER_EQUAL : TokenType.GREATER);
+                break;
+            case '%':
+                AddToken(Match('=') ? TokenType.MODULO_EQUAL : TokenType.MODULO);
                 break;
             case '/':
                 if(Match('/'))
@@ -169,24 +197,61 @@ public class Scanner
     {
         while (IsDigit(Peek())) Advance();
 
+        bool isFloat = false;
+
         //look for decimal dot
         if (Peek() == '.' && IsDigit(PeekNext()))
         {
-            //Consume the "."
-            Advance();
+            isFloat = true;
+            Advance(); //Consume the "."
 
             while(IsDigit(Peek())) Advance();
         }
 
-        AddToken(TokenType.NUMBER, Double.Parse(_source.Substring(_start, _current - _start)));
+        string text = _source.Substring(_start, _current - _start);
+
+        if (isFloat)
+        {
+            AddToken(TokenType.NUMBER, double.Parse(text, CultureInfo.InvariantCulture));
+        } else
+        {
+            AddToken(TokenType.NUMBER, long.Parse(text, CultureInfo.InvariantCulture));
+        }
     }
 
     private void String()
     {
+        var value = new StringBuilder();
+
         while (Peek() != '"' && !IsAtEnd())
         {
+            if (Peek() == '\\')
+            {
+                Advance(); // consume '\'
+                if(IsAtEnd())
+                {
+                    Program.Error(_line, "Unterminated escape sequence.");
+                    return;
+                }
+
+                char escape = Advance();
+
+                switch(escape)
+                {
+                    case 'n': value.Append('\n'); break;
+                    case 't': value.Append('\t'); break;
+                    case 'r': value.Append('\r'); break;
+                    case '"': value.Append('"'); break;
+                    case '\\': value.Append('\\'); break;
+                    default:
+                        Program.Error(_line, "Invalid escape sequence.");
+                        return;
+                }
+                continue;
+            }
+
             if (Peek() == '\n') _line++;
-            Advance();
+            value.Append(Advance());
         }
 
         if(IsAtEnd())
