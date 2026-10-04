@@ -1,0 +1,5 @@
+var age = 50;
+var money = 123.45;
+var motto = "I love TEIC!\n";
+
+const MAIDENS = 0;

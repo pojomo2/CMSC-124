@@ -1,0 +1,26 @@
+var age = 20;
+
+provided (age == 40) {
+	say 0;
+} 
+yet (age > 20) {
+	say 1;
+}
+otherwise {
+	say 2;
+}
+
+
+provided (age == 40) {
+	say Yea;
+} 
+otherwise {
+	say Nay;
+}
+
+provided (age == 40) {
+	say Yea;
+}
+provided (age == 20) {
+	say Yea;
+}

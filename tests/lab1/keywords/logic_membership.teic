@@ -1,0 +1,7 @@
+var positive = Yea;
+var negative = Nay;
+
+say (52 is int);
+say (positive or negative);
+say (positive and negative);
+say (not positive);

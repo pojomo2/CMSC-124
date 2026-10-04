@@ -9,7 +9,8 @@ public class TokenPrinter
         foreach (Token t in tokens)
         {
             var stringified = StringifyToken(t);
-            Console.WriteLine(stringified);
+            Console.Write(stringified);
+            Console.Write("\n");
         }
     }
 
@@ -18,6 +19,6 @@ public class TokenPrinter
         var literal = t.literal;
         if (literal == null) literal = "n/a";
 
-        return $"line {t.line}\t: Found {t.type} [lexeme: {t.lexeme}, literal: {literal}]";
+        return $"line {t.line} : Found {t.type} [lexeme: {t.lexeme}, literal: {literal}]";
     }
 }
