@@ -179,9 +179,6 @@ public class Scanner
                     Program.Error(_line, "Unexpected character.");
                 }
                 break;
-
-
-     
         }
     }
 
