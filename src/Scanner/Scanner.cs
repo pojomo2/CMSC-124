@@ -57,6 +57,9 @@ public class Scanner
         { "Boolean", TokenType.BOOLEAN },
         { "Char", TokenType.CHAR },
         { "String", TokenType.STRING_TYPE },
+
+        // Other
+        { "say", TokenType.SAY }
     };
 
 

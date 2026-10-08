@@ -37,6 +37,9 @@ public enum TokenType
     // Keywords — event-related.
     PROCLAMATION, PROCLAIM, UPON, OBSERVE,
 
+    // Keywords — other.
+    SAY,
+
     // Keywords — built-in type names used by the `is` operator.
     INTEGER, FLOAT, BOOLEAN, CHAR, STRING_TYPE,
 
