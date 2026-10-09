@@ -27,12 +27,12 @@ public class Scanner
         { "const",        TokenType.CONST },
         { "func",         TokenType.FUNC },
         { "requite",      TokenType.RETURN },
-        { "class",        TokenType.CLASS },
+        //{ "class",        TokenType.CLASS },
 
         // Logic and membership
         { "in",           TokenType.IN },
         { "is",           TokenType.IS },
-        { "inherits",     TokenType.INHERITS },
+        //{ "inherits",     TokenType.INHERITS },
         { "and",          TokenType.AND},
         { "or",           TokenType.OR},
         { "not",          TokenType.NOT},

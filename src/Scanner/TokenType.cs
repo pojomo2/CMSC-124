@@ -26,10 +26,10 @@ public enum TokenType
     TRUE, FALSE, NIL, AND, OR, NOT,
 
     // Keywords — variables, functions, classes.
-    VAR, CONST, FUNC, RETURN, CLASS,
+    VAR, CONST, FUNC, RETURN,
 
     // Keywords — logic and membership.
-    IN, IS, INHERITS,
+    IN, IS,
 
     // Keywords — control flow and loops.
     WHILE, FOR, FOREACH, BREAK, CONTINUE, IF, YET, ELSE,
