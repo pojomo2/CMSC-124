@@ -27,15 +27,15 @@ public class Scanner
         { "const",        TokenType.CONST },
         { "func",         TokenType.FUNC },
         { "requite",      TokenType.RETURN },
-        { "class",        TokenType.CLASS },
+        //{ "class",        TokenType.CLASS },
 
         // Logic and membership
         { "in",           TokenType.IN },
         { "is",           TokenType.IS },
-        { "inherits",     TokenType.INHERITS },
-        { "and", TokenType.AND},
-        { "or", TokenType.OR},
-        {"NOT", TokenType.NOT},
+        //{ "inherits",     TokenType.INHERITS },
+        { "and",          TokenType.AND},
+        { "or",           TokenType.OR},
+        { "not",          TokenType.NOT},
 
         // Control flow and loops
         { "whilst",       TokenType.WHILE },
@@ -57,6 +57,9 @@ public class Scanner
         { "Boolean", TokenType.BOOLEAN },
         { "Char", TokenType.CHAR },
         { "String", TokenType.STRING_TYPE },
+
+        // Other
+        { "say", TokenType.SAY }
     };
 
 
@@ -120,7 +123,7 @@ public class Scanner
                 AddToken(Match('=') ? TokenType.STAR_EQUAL : TokenType.STAR);
                 break;
             case '!':
-                AddToken(Match('=') ? TokenType.BANG_EQUAL : TokenType.BANG);
+                AddToken(Match('=') ? TokenType.BANG_EQUAL : TokenType.NOT);
                 break;
             case '=':
                 AddToken(Match('=') ? TokenType.EQUAL_EQUAL : TokenType.EQUAL);
@@ -152,6 +155,26 @@ public class Scanner
                     AddToken(TokenType.SLASH);
                 }
                 break;
+            case '&':
+                if (Match('&'))
+                {
+                    AddToken(TokenType.AND);
+                }
+                else
+                {
+                    Program.Error(_line, "Unexpected character.");
+                }
+                break;
+            case '|':
+                if (Match('|'))
+                {
+                    AddToken(TokenType.OR);
+                }
+                else
+                {
+                    Program.Error(_line, "Unexpected character.");
+                }
+                break;
 
             case ' ':
             case '\r':
@@ -179,9 +202,6 @@ public class Scanner
                     Program.Error(_line, "Unexpected character.");
                 }
                 break;
-
-
-     
         }
     }
 

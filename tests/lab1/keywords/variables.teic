@@ -1,5 +1,6 @@
 var age = 50;
 var money = 123.45;
 var motto = "I love TEIC!\n";
+var while2 = "I'm a variable!";
 
 const MAIDENS = 0;

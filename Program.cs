@@ -33,16 +33,15 @@ namespace Ileto
     {
         string source = File.ReadAllText(path);
 
-        if (source.Length == 0)
-        {
-            Console.WriteLine("Hello, world!");
-            Environment.Exit(0);
-        }
+        // if (source.Length == 0)
+        // {
+        //     Console.WriteLine("Hello, world!");
+        //     Environment.Exit(0);
+        // }
 
         Run(source);
 
-        if (HadError)
-            Environment.Exit(65);
+        if (HadError) Environment.Exit(65);
     }
 
     static void RunPrompt()

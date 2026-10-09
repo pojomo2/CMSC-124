@@ -6,3 +6,7 @@ proclaim count_changed;
 upon (count_changed) {
 	say "The count has changed.";
 }
+
+observe (count) {
+	say "The count has also changed.";
+}
