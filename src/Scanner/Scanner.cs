@@ -33,9 +33,9 @@ public class Scanner
         { "in",           TokenType.IN },
         { "is",           TokenType.IS },
         { "inherits",     TokenType.INHERITS },
-        { "and", TokenType.AND},
-        { "or", TokenType.OR},
-        {"NOT", TokenType.NOT},
+        { "and",          TokenType.AND},
+        { "or",           TokenType.OR},
+        { "not",          TokenType.NOT},
 
         // Control flow and loops
         { "whilst",       TokenType.WHILE },
