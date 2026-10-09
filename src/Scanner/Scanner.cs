@@ -123,7 +123,7 @@ public class Scanner
                 AddToken(Match('=') ? TokenType.STAR_EQUAL : TokenType.STAR);
                 break;
             case '!':
-                AddToken(Match('=') ? TokenType.BANG_EQUAL : TokenType.BANG);
+                AddToken(Match('=') ? TokenType.BANG_EQUAL : TokenType.NOT);
                 break;
             case '=':
                 AddToken(Match('=') ? TokenType.EQUAL_EQUAL : TokenType.EQUAL);
@@ -153,6 +153,26 @@ public class Scanner
                 else
                 {
                     AddToken(TokenType.SLASH);
+                }
+                break;
+            case '&':
+                if (Match('&'))
+                {
+                    AddToken(TokenType.AND);
+                }
+                else
+                {
+                    Program.Error(_line, "Unexpected character.");
+                }
+                break;
+            case '|':
+                if (Match('|'))
+                {
+                    AddToken(TokenType.OR);
+                }
+                else
+                {
+                    Program.Error(_line, "Unexpected character.");
                 }
                 break;
 
