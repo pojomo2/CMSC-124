@@ -13,11 +13,10 @@ public enum TokenType
     LESS, LESS_EQUAL,
     AMP_AMP, PIPE_PIPE,          // && , ||
     SLASH_SLASH,                 // // (integer division)
-    MODULO_EQUAL, // %=
 
     // Compound assignment operators.
     PLUS_EQUAL, MINUS_EQUAL, STAR_EQUAL, SLASH_EQUAL,
-    SLASH_SLASH_EQUAL, PERCENT_EQUAL,
+    SLASH_SLASH_EQUAL, MODULO_EQUAL,
 
     // Literals.
     IDENTIFIER, STRING, NUMBER, CHARACTER, LEFT_BRACKET, RIGHT_BRACKET,

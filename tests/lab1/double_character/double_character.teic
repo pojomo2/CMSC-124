@@ -34,6 +34,7 @@ a //= b;
 a % b;
 a %= b;
 
-// AMP_AMP, PIPE_PIPE
+// And-Or
 a && a;
 b || b;
+
