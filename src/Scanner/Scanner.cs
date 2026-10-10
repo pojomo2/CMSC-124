@@ -142,7 +142,7 @@ public class Scanner
                 {
                     AddToken(Match('=') ? TokenType.SLASH_SLASH_EQUAL: TokenType.SLASH_SLASH);
                 }
-                else if (Match('*'))
+                else if (Match('#'))
                 {
                     BlockComment();
                 }
@@ -155,6 +155,7 @@ public class Scanner
                     AddToken(TokenType.SLASH);
                 }
                 break;
+            
             case '&':
                 if (Match('&'))
                 {
@@ -165,6 +166,7 @@ public class Scanner
                     Program.Error(_line, "Unexpected character.");
                 }
                 break;
+            
             case '|':
                 if (Match('|'))
                 {
@@ -175,7 +177,15 @@ public class Scanner
                     Program.Error(_line, "Unexpected character.");
                 }
                 break;
-
+            
+            case '#':
+                // for single line comments, keep Advance-ing until newline or EOF
+                while (Peek() != '\n' && !IsAtEnd())
+                {
+                    Advance();
+                }
+                break;
+            
             case ' ':
             case '\r':
             case '\t':
@@ -328,7 +338,7 @@ public class Scanner
 
     private void BlockComment()
     {
-        while(!(Peek() == '*' && PeekNext() == '/') && !IsAtEnd())
+        while(!(Peek() == '#' && PeekNext() == '/') && !IsAtEnd())
         {
             if (Peek() == '\n') _line++;
             Advance();
@@ -340,9 +350,10 @@ public class Scanner
             return;
         }
 
-        Advance(); // consume '*'
+        Advance(); // consume '#'
         Advance(); // consume '/'
-        // no AddToken - comments are discarded, not tokenized
+        
+        // no AddToken; comments are discarded, not tokenized
     }
 
 
