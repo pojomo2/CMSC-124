@@ -13,6 +13,4 @@ line 4 : Found AND [lexeme: &&, literal: n/a]
 line 4 : Found IDENTIFIER [lexeme: b, literal: n/a]
 line 4 : Found SEMICOLON [lexeme: ;, literal: n/a]
 line 5 : Found IDENTIFIER [lexeme: a, literal: n/a]
-line 5 : Found IDENTIFIER [lexeme: b, literal: n/a]
-line 5 : Found SEMICOLON [lexeme: ;, literal: n/a]
-line 5 : Found EOF [lexeme: , literal: n/a]
+
