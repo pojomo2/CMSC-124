@@ -1,0 +1,13 @@
+line 1 : Found STRING [lexeme: "This is Ileto.\n", literal: This is Ileto.
+]
+line 1 : Found SEMICOLON [lexeme: ;, literal: n/a]
+line 2 : Found STRING [lexeme: "This is Ileto.\t", literal: This is Ileto.	]
+line 2 : Found SEMICOLON [lexeme: ;, literal: n/a]
+line 3 : Found STRING [lexeme: "This is Ileto.\r", literal: This is Ileto.
+]
+line 3 : Found SEMICOLON [lexeme: ;, literal: n/a]
+line 4 : Found STRING [lexeme: "\"This is Ileto.\"", literal: "This is Ileto."]
+line 4 : Found SEMICOLON [lexeme: ;, literal: n/a]
+line 5 : Found STRING [lexeme: "\\This is Ileto.\\", literal: \This is Ileto.\]
+line 5 : Found SEMICOLON [lexeme: ;, literal: n/a]
+line 5 : Found EOF [lexeme: , literal: n/a]

@@ -1,0 +1,10 @@
+# This entire line is a comment!
+
+var x = 10; # Here's a trailing comment!
+
+/#
+Now here's a multi-line comment.
+It spans multiple lines.
+#/
+
+/# You can do this too (though it looks ugly): #/ var y = 5;

@@ -14,6 +14,9 @@ public class Scanner
     private int _current = 0;
     private int _line = 1;
 
+    // error flag: used to stop scanning when an error is detected
+    private bool _hadError = false;
+
 
     private static readonly Dictionary<string, TokenType> keywords = new()
     {
@@ -52,14 +55,14 @@ public class Scanner
         { "proclaim",     TokenType.PROCLAIM },
         { "upon",         TokenType.UPON },
         { "observe",      TokenType.OBSERVE },
-        { "Integer", TokenType.INTEGER },
-        { "Float", TokenType.FLOAT },
-        { "Boolean", TokenType.BOOLEAN },
-        { "Char", TokenType.CHAR },
-        { "String", TokenType.STRING_TYPE },
+        { "Integer",      TokenType.INTEGER },
+        { "Float",        TokenType.FLOAT },
+        { "Boolean",      TokenType.BOOLEAN },
+        { "Char",         TokenType.CHAR },
+        { "String",       TokenType.STRING_TYPE },
 
         // Other
-        { "say", TokenType.SAY }
+        { "say",          TokenType.SAY }
     };
 
 
@@ -72,9 +75,14 @@ public class Scanner
     {
         while(!IsAtEnd())
         {
-            //we are at the beginning of the next lexeme
+            // we are at the beginning of the next lexeme
             _start = _current;
             ScanToken();
+
+            if (_hadError)
+            {
+                return _tokens;
+            }
         }
 
         _tokens.Add(new Token(TokenType.EOF, "", null, _line));
@@ -142,7 +150,7 @@ public class Scanner
                 {
                     AddToken(Match('=') ? TokenType.SLASH_SLASH_EQUAL: TokenType.SLASH_SLASH);
                 }
-                else if (Match('*'))
+                else if (Match('#'))
                 {
                     BlockComment();
                 }
@@ -155,6 +163,7 @@ public class Scanner
                     AddToken(TokenType.SLASH);
                 }
                 break;
+            
             case '&':
                 if (Match('&'))
                 {
@@ -162,9 +171,10 @@ public class Scanner
                 }
                 else
                 {
-                    Program.Error(_line, "Unexpected character.");
+                    Error("Unexpected character.");
                 }
                 break;
+            
             case '|':
                 if (Match('|'))
                 {
@@ -172,10 +182,18 @@ public class Scanner
                 }
                 else
                 {
-                    Program.Error(_line, "Unexpected character.");
+                    Error("Unexpected character.");
                 }
                 break;
-
+            
+            case '#':
+                // for single line comments, keep Advance-ing until newline or EOF
+                while (Peek() != '\n' && !IsAtEnd())
+                {
+                    Advance();
+                }
+                break;
+            
             case ' ':
             case '\r':
             case '\t':
@@ -199,7 +217,7 @@ public class Scanner
                 }
                 else
                 {
-                    Program.Error(_line, "Unexpected character.");
+                    Error("Unexpected character.");
                 }
                 break;
         }
@@ -228,9 +246,16 @@ public class Scanner
     {
         while (IsDigit(Peek())) Advance();
 
+        // define number literal-alphabet character concatenation as invalid
+        if (IsAlpha(Peek()))
+        {
+            Error("Invalid number literal");
+            return;
+        }
+
         bool isFloat = false;
 
-        //look for decimal dot
+        // look for decimal dot
         if (Peek() == '.' && IsDigit(PeekNext()))
         {
             isFloat = true;
@@ -261,7 +286,7 @@ public class Scanner
                 Advance(); // consume '\'
                 if(IsAtEnd())
                 {
-                    Program.Error(_line, "Unterminated escape sequence.");
+                    Error("Unterminated escape sequence.");
                     return;
                 }
 
@@ -275,7 +300,7 @@ public class Scanner
                     case '"': value.Append('"'); break;
                     case '\\': value.Append('\\'); break;
                     default:
-                        Program.Error(_line, "Invalid escape sequence.");
+                        Error("Invalid escape sequence.");
                         return;
                 }
                 continue;
@@ -287,13 +312,11 @@ public class Scanner
 
         if(IsAtEnd())
         {
-            Program.Error(_line, "Untermianted string.");
+            Error("Untermianted string.");
             return;
         }
 
-       
-
-        Advance(); //the closing ".
+        Advance(); // consume the closing double-quote
 
         AddToken(TokenType.STRING, value);
         
@@ -309,7 +332,7 @@ public class Scanner
 
         if (IsAtEnd())
         {
-            Program.Error(_line, "Unterminated character.");
+            Error("Unterminated character.");
             return;
         }
 
@@ -319,7 +342,7 @@ public class Scanner
 
         if (value.Length != 1)
         {
-            Program.Error(_line, "Character literal must contain exactly one character.");
+            Error("Character literal must contain exactly one character.");
             return;
         }
 
@@ -328,7 +351,7 @@ public class Scanner
 
     private void BlockComment()
     {
-        while(!(Peek() == '*' && PeekNext() == '/') && !IsAtEnd())
+        while(!(Peek() == '#' && PeekNext() == '/') && !IsAtEnd())
         {
             if (Peek() == '\n') _line++;
             Advance();
@@ -336,13 +359,14 @@ public class Scanner
 
         if (IsAtEnd())
         {
-            Program.Error(_line, "Unterminated block comment.");
+            Error("Unterminated block comment.");
             return;
         }
 
-        Advance(); // consume '*'
+        Advance(); // consume '#'
         Advance(); // consume '/'
-        // no AddToken - comments are discarded, not tokenized
+
+        // no AddToken; comments are discarded, not tokenized
     }
 
 
@@ -408,6 +432,12 @@ public class Scanner
         String text = _source.Substring(_start, _current - _start);
         _tokens.Add(new Token(type, text, literal, _line));
 
+    }
+
+    private void Error(string message)
+    {
+        _hadError = true;
+        Program.Error(_line, message);
     }
 }
 

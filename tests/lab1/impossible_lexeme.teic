@@ -1,0 +1,6 @@
+/#
+Handle characters that cannot possibly start any valid,
+defined lexeme within Ileto.
+#/
+
+5 ^ 12;
