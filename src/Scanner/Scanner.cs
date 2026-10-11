@@ -316,9 +316,7 @@ public class Scanner
             return;
         }
 
-       
-
-        Advance(); //the closing ".
+        Advance(); // consume the closing double-quote
 
         AddToken(TokenType.STRING, value);
         
