@@ -246,9 +246,16 @@ public class Scanner
     {
         while (IsDigit(Peek())) Advance();
 
+        // define number literal-alphabet character concatenation as invalid
+        if (IsAlpha(Peek()))
+        {
+            Error("Invalid number literal");
+            return;
+        }
+
         bool isFloat = false;
 
-        //look for decimal dot
+        // look for decimal dot
         if (Peek() == '.' && IsDigit(PeekNext()))
         {
             isFloat = true;
