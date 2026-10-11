@@ -1,7 +1,6 @@
 var a = 0;
 var b = 1;
 
-// Comparisons
 a = b;
 a == b;
 
@@ -14,8 +13,6 @@ a <= b;
 a > b;
 a >= b;
 
-
-// Operations
 a + b;
 a += b;
 
@@ -34,7 +31,6 @@ a //= b;
 a % b;
 a %= b;
 
-// And-Or
 a && a;
 b || b;
 
