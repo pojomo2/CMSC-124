@@ -1,0 +1,3 @@
+# This is a number followed by something that isn't a number:
+var a = 5;
+var b = 6p;

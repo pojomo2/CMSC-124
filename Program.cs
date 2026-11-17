@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using Ileto.Debug;
 using Ileto.Took;
 
-namespace Ileto
+namespace Ileto;
+
+public class Program
 {
     public class Program
     {
