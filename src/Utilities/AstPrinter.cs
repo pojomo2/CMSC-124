@@ -1,31 +1,49 @@
-using System;
-
-
-using System.IO;
-using System.Collections.Generic;
-using System.Reflection.Metadata;
-using Microsoft.VisualBasic;
-using System.Linq.Expressions;
+using System.Text;
+using Ileto;
 
 namespace Ileto.Took;
 
-
-class AstPrinter : Expr.IVisitor<string>
+internal sealed class AstPrinter : Expr.IVisitor<string>
 {
-    public string Print(Expression expr)
+    public string Print(Expr expr)
     {
-        return expr.Accept<string>(this);
+        return expr.Accept(this);
     }
 
     public string VisitBinaryExpr(Expr.Binary expr)
     {
-        return Parenthesize(Expr.Operator.lexem, Expr.left, Expr.right);
+        return Parenthesize(expr.Operator.lexeme, expr.Left, expr.Right);
     }
 
     public string VisitGroupingExpr(Expr.Grouping expr)
     {
-        return Parenthesize("group", Expr.Expression);
+        return Parenthesize("group", expr.Expression);
     }
 
-    
+    public string VisitLiteralExpr(Expr.Literal expr)
+    {
+        if (expr.Value is null) return "nil";
+        if (expr.Value is bool value) return value ? "true" : "false";
+        return expr.Value?.ToString() ?? "nil";
+    }
+
+    public string VisitUnaryExpr(Expr.Unary expr)
+    {
+        return Parenthesize(expr.Operator.lexeme, expr.Right);
+    }
+
+    private string Parenthesize(string name, params Expr[] exprs)
+    {
+        var builder = new StringBuilder();
+        builder.Append('(').Append(name);
+
+        foreach (Expr expr in exprs)
+        {
+            builder.Append(' ').Append(Print(expr));
+        }
+
+        return builder.Append(')').ToString();
+    }
+
+
 }

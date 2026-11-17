@@ -31,122 +31,140 @@ public static class GenerateAst
     }
 
     private static void DefineAst(
-        String outputDir, String baseName, List<String> types) 
+        String outputDir, 
+        String baseName, 
+        List<String> types) 
     {
-        String path = outputDir + "/" + baseName + " .cs";
-        
-        using (StreamWriter writer = new StreamWriter(path, false, System.Text.Encoding.UTF8))
-        {
-            writer.WriteLine("namespace CraftingInterpreters.Lox;");
-            writer.WriteLine();
-            writer.WriteLine("using System.Collections.Generic;");
-            writer.WriteLine();
-            writer.WriteLine("abstract class " + baseName);
-            writer.WriteLine("{");
+        Directory.CreateDirectory(outputDir);
+        string path = Path.Combine(outputDir, baseName + ".cs");
 
-            DefineVisitor(writer, baseName, types);
+        using StreamWriter writer = new StreamWriter(path, false, System.Text.Encoding.UTF8);
 
-
-            foreach (string type in types)
-            {
-                string[] parts = type.Split(':');
-                string className = parts[0].Trim();
-                string fields = parts[1].Trim();
-
-                DefineType(writer, baseName, className, fields); 
-            }
-
-            //The base accept() method
-            writer.WriteLine();
-            writer.WriteLine("  abstract <R> R accept(Visitor<R> visitor);");
-
-            writer.WriteLine("}");    
-
-            writer.Close();    
-        }
-
-
-    }
-
-    private static void DefineType(
-        StreamWriter writer, String baseName,
-        String className, String fieldList
-    )
-    {
-        writer.WriteLine("  static class " + className + " extends " + baseName + " {");
-
-        //Constructor 
-        writer.WriteLine("  " + className + "(" + fieldList + ") {");
-
-        //Store parameters in fields
-        String[] fields = fieldList.Split(", ");
-        foreach (string field in fields)
-        {
-            String name = field.Split(" ")[1];
-            writer.WriteLine("  this." + name + " = " + name + ";");
-        }
-
-        writer.WriteLine("  }");
-
-        //Fields
+        //Keep this namespace the same as the one AstPrinter uses
+        writer.WriteLine("using Ileto;");
+        writer.WriteLine("namespace Ileto.Took;");
         writer.WriteLine();
-        foreach (string field in fields)
+        writer.WriteLine($"public abstract class {baseName}");
+        writer.WriteLine("{");
+
+        DefineVisitor(writer, baseName, types);
+
+        foreach (string type in types)
         {
-            writer.WriteLine("  final " + field + ";");
+            string[] parts = type.Split(':', 2);
+            string className = parts[0].Trim();
+            string fields = parts[1].Trim();
+
+            DefineType(writer, baseName, className, fields);
         }
 
-        writer.WriteLine("  }");
+        writer.WriteLine();
+        writer.WriteLine("      public abstract R Accept<R>(IVisitor<R> visitor);");
+        writer. WriteLine("}");
+
+       
+
     }
 
     private static void DefineVisitor(
-        StreamWriter writer, String baseName, List<String> types)
+        StreamWriter writer, 
+        string baseName, 
+        List<String> types)
     {
-        writer.WriteLine("  interface Visitor<R>");
+        writer.WriteLine("      public interface IVisitor<R>");
+        writer.WriteLine("      {");
 
-        foreach (String type in types)
+        foreach (string type in types)
         {
-            String typeName = type.Split(":")[0].Trim();
-            writer.WriteLine("  R visit" + typeName + baseName + "(" + typeName + " " + baseName.ToLower() + ");");
+            string typeName = type.Split(':', 2)[0].Trim();
+
+            writer.WriteLine(
+                $"      R Visit{typeName}{baseName}({typeName} expr);");
         }
 
-        writer.WriteLine("  }");
+        writer.WriteLine("      }");
     }
 
     private static void DefineType(
-        StreamWriter writer, String baseName,
-        String className, String fieldList
-    )
+        StreamWriter writer, 
+        String baseName,
+        String className, 
+        String fieldList)
     {
-        writer.WriteLine(" static class " + className + " extends " + baseName + " {");
+        string[] fields = fieldList.Split(
+            ',',
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
-        //Constructor 
-        writer.WriteLine("  " + className + "(" + fieldList + ") {");
+        writer.WriteLine($"     public sealed class {className} : {baseName}");
+        writer.WriteLine("   {");
 
-        //Store parameters in fields
-        String[] fields = fieldList.Split(", ");
+        //Generate read-only properties for the node's fields
         foreach (string field in fields)
         {
-            String name = field.Split(" ")[1];
-            writer.WriteLine("  this." + name + " = " + name + ";");
+            string[] parts = field.Split(
+                ' ',
+                StringSplitOptions.RemoveEmptyEntries);
+            
+            string fieldType = parts[0] == "Object" ? "Object" : parts[0];
+            string fieldName = parts[1];
+            string propertyName = 
+                char.ToUpperInvariant(fieldName[0]) + fieldName[1..];
+
+            writer.WriteLine(
+                $"        public {fieldType} {propertyName} {{ get; }}"); 
         }
 
-        writer.WriteLine("  }");
+        // Generate the constructor parameters
+        string[] parameters = new string[fields.Length];
 
-        //Fields
-        writer.WriteLine();
-        foreach (string field in fields)
+        for (int i = 0; i < fields.Length; i++)
         {
-            writer.WriteLine("  final " + field + ";");
+            string[] parts = fields[i].Split(
+                ' ',
+                StringSplitOptions.RemoveEmptyEntries);
+            
+            string fieldType = parts[0] == "Object" ? "object" : parts[0];
+            string fieldName = parts[1];
+            string parameterName = 
+                fieldName == "operator" ? "@operator" : fieldName;
+            
+            parameters[i] = $"{fieldType} {parameterName}";
         }
 
-        writer.WriteLine("  }");
-
-        // Visitor pattern
         writer.WriteLine();
-        writer.WriteLine("  @Override");
-        writer.WriteLine("  <R> R accept(Visitor<R> visitor) {");
-        writer.WriteLine("  return visitor.visit" + className + baseName + "(this);");
-        writer.WriteLine("  }");
+        writer.WriteLine(
+            $"        public {className}({string.Join(", ", parameters)})");
+    writer.WriteLine("        {");
+
+    // Assign constructor parameters to properties.
+    foreach (string field in fields)
+    {
+        string[] parts = field.Split(
+            ' ',
+            StringSplitOptions.RemoveEmptyEntries);
+
+        string fieldName = parts[1];
+        string propertyName =
+            char.ToUpperInvariant(fieldName[0]) + fieldName[1..];
+        string parameterName =
+            fieldName == "operator" ? "@operator" : fieldName;
+
+        writer.WriteLine(
+            $"            {propertyName} = {parameterName};");
+    }
+
+    writer.WriteLine("        }");
+
+    // Generate the visitor dispatch method.
+    writer.WriteLine();
+    writer.WriteLine(
+        $"        public override R Accept<R>(IVisitor<R> visitor)");
+    writer.WriteLine("        {");
+    writer.WriteLine(
+        $"            return visitor.Visit{className}{baseName}(this);");
+    writer.WriteLine("        }");
+
+    writer.WriteLine("    }");
     }
 
 }
