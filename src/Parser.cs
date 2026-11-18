@@ -38,7 +38,7 @@ class Parser {
     {
         Expr expr = Comparison();
 
-        while (Match(BANG_EQUAL, EQUAL_EQUAL))
+        while (Match(TokenType.BANG_EQUAL, TokenType.EQUAL_EQUAL))
         {
             Token op = Previous();
             Expr right = Comparison();
@@ -52,7 +52,7 @@ class Parser {
     {
         Expr expr = Term();
 
-        while(Match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL))
+        while(Match(TokenType.GREATER, TokenType.GREATER_EQUAL, TokenType.LESS, TokenType.LESS_EQUAL))
         {
             Token op = Previous();
             Expr right = Term();
@@ -66,7 +66,7 @@ class Parser {
     {
         Expr expr = Factor();
         
-        while (Match(MINUS, PLUS))
+        while (Match(TokenType.MINUS, TokenType.PLUS))
         {
             Token op = Previous();
             Expr right = Factor();
@@ -81,7 +81,7 @@ class Parser {
     {
         Expr expr = Unary();
 
-        while (Match(SLASH, STAR))
+        while (Match(TokenType.SLASH, TokenType.STAR))
         {
             Token op = Previous();
             Expr right = Unary();
@@ -93,7 +93,7 @@ class Parser {
 
     private Expr Unary()
     {
-        if (Match(BANG, MINUS))
+        if (Match(TokenType.BANG, TokenType.MINUS))
         {
             Token op = Previous();
             Expr right = Unary();
@@ -105,19 +105,19 @@ class Parser {
 
     private Expr Primary()
     {
-        if (Match(FALSE)) return new Expr.Literal(false);
-        if (Match(TRUE)) return new Expr.Literal(true);
-        if (Match(NIL)) return new Expr.Literal(null);
+        if (Match(TokenType.FALSE)) return new Expr.Literal(false);
+        if (Match(TokenType.TRUE)) return new Expr.Literal(true);
+        if (Match(TokenType.NIL)) return new Expr.Literal(null);
 
-        if (Match(NUMBER, STRING))
+        if (Match(TokenType.NUMBER, TokenType.STRING))
         {
             return new Expr.Literal(Previous().literal);
         }
 
-        if (Match(LEFT_PAREN))
+        if (Match(TokenType.LEFT_PAREN))
         {
             Expr expr = Expression();
-            Consume(RIGHT_PAREN, "Expect ')' after expression.");
+            Consume(TokenType.RIGHT_PAREN, "Expect ')' after expression.");
             return new Expr.Grouping(expr);                                         
         }
         throw new Error("Expected an expression");
@@ -158,18 +158,18 @@ class Parser {
 
         while (!IsAtEnd())
         {
-            if (Previous().type == SEMICOLON) return;
+            if (Previous().type == TokenType.SEMICOLON) return;
 
             switch(Peek().type)
             {
-                case CLASS:
-                case FUN:
-                case VAR:
-                case FOR:
-                case IF:
-                case WHILE:
-                case PRINT:
-                case RETURN:
+                case TokenType.CLASS:
+                case TokenType.FUN:
+                case TokenType.VAR:
+                case TokenType.FOR:
+                case TokenType.IF:
+                case TokenType.WHILE:
+                case TokenType.PRINT:
+                case TokenType.RETURN:
                     return;
             }
 
@@ -192,7 +192,7 @@ class Parser {
 
     private bool IsAtEnd()
     {
-        return Peek().type == EOF;
+        return Peek().type == TokenType.EOF;
     }
 
     private Token Peek()
