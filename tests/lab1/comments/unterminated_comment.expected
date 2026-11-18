@@ -1,0 +1,5 @@
+line 1 : Found VAR [lexeme: var, literal: n/a]
+line 1 : Found IDENTIFIER [lexeme: foo, literal: n/a]
+line 1 : Found EQUAL [lexeme: =, literal: n/a]
+line 1 : Found NUMBER [lexeme: 5, literal: 5]
+line 1 : Found SEMICOLON [lexeme: ;, literal: n/a]

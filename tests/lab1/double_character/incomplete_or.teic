@@ -1,0 +1,5 @@
+var a = Yea;
+var b = Nay;
+
+a || b;
+a | b;

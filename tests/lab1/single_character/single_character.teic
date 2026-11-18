@@ -1,0 +1,13 @@
+var x;
+var a;
+var b;
+
+x = a + b;
+x = a - b;
+x = a * b;
+x = a / b;
+x = a % b;
+x = a < b;
+x = a > b;
+x = !a;
+x = -a;

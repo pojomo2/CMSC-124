@@ -1,0 +1,2 @@
+line 1 : Found STRING [lexeme: "Here's a valid escape: \\", literal: Here's a valid escape: \]
+line 1 : Found SEMICOLON [lexeme: ;, literal: n/a]
