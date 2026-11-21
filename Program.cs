@@ -101,6 +101,12 @@ public class Program
                 Report(token.line, " at '" + token.lexeme + "'", message);
             }
         }
+
+        static void RuntimeError(RuntimeError error)
+        {
+            Console.Error.WriteLine($"{error.Message}\n[line {error.Token.Line}]");
+            HadRuntimeError = true;
+        }
     }
     
 }
