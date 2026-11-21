@@ -1,4 +1,5 @@
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using Ileto.Took;
 
 namespace Ileto;
@@ -9,6 +10,18 @@ class Interpreter : Expr.IVisitor<object> {
     public object VisitGroupingExpr(Expr.Grouping expr)
     {
         return Evaluate(expr.Expression);
+    }
+
+    void interpret(Expr expression)
+    {
+        try
+        {
+            Object value = Evaluate(expression);
+            Console.WriteLine(Stringify(expression));
+        } catch (RuntimeError error)
+        {
+            RuntimeError(error);
+        }
     }
 
     private object Evaluate(Expr expr)
@@ -27,16 +40,20 @@ class Interpreter : Expr.IVisitor<object> {
                 CheckNumberOperands(expr.Operator, left, right);
                 return (double)left > (double)right;
             case TokenType.GREATER_EQUAL:
+                CheckNumberOperands(expr.Operator, left, right);
                 return (double)left >= (double)right;
             case TokenType.LESS:
+                CheckNumberOperands(expr.Operator, left, right);
                 return (double)left < (double)right;
             case TokenType.LESS_EQUAL:
+                CheckNumberOperands(expr.Operator, left, right);
                 return (double)left <= (double)right;
             case TokenType.EQUAL_EQUAL:
                 return IsEqual(left, right);
             case TokenType.BANG_EQUAL:
                 return !IsEqual(left, right);
             case TokenType.MINUS:
+                CheckNumberOperands(expr.Operator, left, right);
                 return (double)left - (double)right;
             case TokenType.PLUS:
                 if (left is double && right is double)
@@ -47,10 +64,12 @@ class Interpreter : Expr.IVisitor<object> {
                 {
                     return (string)left + (string)right;
                 }
-                break;
+                throw new RuntimeError(expr.Operator, "Operands must be two numbers or two strings.");
             case TokenType.SLASH:
+                CheckNumberOperands(expr.Operator, left, right);
                 return (double)left / (double)right;
             case TokenType.STAR:
+                CheckNumberOperands(expr.Operator, left, right);
                 return (double)left * (double)right;
         }
 
@@ -69,6 +88,7 @@ class Interpreter : Expr.IVisitor<object> {
              case TokenType.MINUS:
                 CheckNumberOperand(expr.Operator, right);
                 return -(double)right;
+
         }
 
 
@@ -103,5 +123,22 @@ class Interpreter : Expr.IVisitor<object> {
     private bool IsEqual(object a, object b)
     {
         return object.Equals(a, b);
+    }
+
+    private string Stringify(Object ob)
+    {
+       if (ob == null) return "nil";
+
+       if (ob is Double)
+        {
+            string text = ob.ToString();
+            if (text.EndsWith(".0"))
+            {
+                text = text.Substring(0, text.Length - 2);
+            }
+            return text;
+        } 
+
+        return ob.ToString();
     }
 }                                                                                                                                                                                                           
